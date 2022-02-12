@@ -30,13 +30,13 @@ router.get('/', async ( req, res,next) => {
         }
 
         let [news] = await db.getConnection().execute(query);
-        let arr = [];
-        news.forEach(item => {
-            arr.push({id: item.id,title: item.title, date: item.date, image: item.image});
-            return arr;
-        });
+        // let arr = [];
+        // news.forEach(item => {
+        //     arr.push({id: item.id,title: item.title,content: item.content,image: item.image, date: item.date});
+        //     return arr;
+        // });
 
-        return  res.send(arr);
+        return  res.send(news);
     } catch (e) {
         next(e)
     }
@@ -62,24 +62,26 @@ router.post('/', upload.single('image'), async (req, res,next) => {
             return res.status(400).send({message: 'Wrong news'});
         }
 
+        const dateString = new Date().toJSON().substr(0,10);
+
         const news = {
             title: req.body.title,
             content: req.body.content,
-            date: new Date().toISOString(),
             image: null,
+            date: dateString,
         };
 
         if (req.file) {
             news.image = req.file.filename;
         }
 
-        let query = 'INSERT INTO news (title,content,date,image) VALUES (?,?,?,?)';
+        let query = 'INSERT INTO news (title,content,image,date) VALUES (?,?,?,?)';
 
         const [results] = await db.getConnection().execute(query, [
             news.title,
             news.content,
+            news.image,
             news.date,
-            news.image
         ]);
 
         const id = results.insertId;

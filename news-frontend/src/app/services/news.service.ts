@@ -33,17 +33,26 @@ export  class NewsService {
         this.newsChange.next(this.news.slice());
         this.newsFetching.next(false);
       });
-  }
+  };
 
   createNewPost(newsData: NewsData) {
     const formData = new FormData();
-
     Object.keys(newsData).forEach(key => {
       if (newsData[key] !== null) {
         formData.append(key,newsData[key]);
       }
     })
-
     return this.http.post(environment.apiUrl + '/news', formData);
   };
+
+  fetchNewsDetails(id: string) {
+    return this.http.get<News>(environment.apiUrl + `/news/${id}`).pipe(
+      map(result => {
+        if (!result) {
+          return  null
+        }
+        return new News(result.id, result.title, result.content, result.image, result.date);
+      })
+    );
+  }
 }
