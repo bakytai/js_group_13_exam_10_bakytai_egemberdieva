@@ -1,0 +1,35 @@
+<div style="width: 70%; padding: 40px">
+  <mat-card>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input name="title" required matInput ngModel/>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Content</mat-label>
+          <textarea
+            name="content"
+            ngModel
+            required
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+          ></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+         <app-file-input name="image" ngModel></app-file-input>
+        </mat-form-field>
+        <div>
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="f.invalid"
+          >SAVE</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

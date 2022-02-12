@@ -1,0 +1,28 @@
+<h1>POSTS</h1>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div
+    fxFlex.xs="100%"
+    fxFlex.sm="50%"
+    fxFlex.lt-lg="33%"
+    fxFlex="25%"
+    *ngFor="let post of posts"
+  >
+  <mat-card class="example-card">
+    <mat-card-title-group>
+      <mat-card-title>{{ post.title }}</mat-card-title>
+      <mat-card-subtitle>At {{ post.date }}</mat-card-subtitle>
+      <img mat-card-sm-image *ngIf="post.image" [src]="apiUrl + '/uploads/' + post.image"
+           [alt]="'Photo of ' + post.title" >
+    </mat-card-title-group>
+    <mat-card-content>
+      {{ post.content }}
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <button mat-button>READ FULL POST</button>
+      <button mat-button>DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+</div>
