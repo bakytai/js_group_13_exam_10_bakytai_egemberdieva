@@ -19,7 +19,7 @@
     <mat-divider inset></mat-divider>
     <mat-card-actions>
       <button [routerLink]="['/news', post.id]" mat-button>READ FULL POST</button>
-      <button mat-button>DELETE</button>
+      <button (click)="deletePost(post.id)" mat-button>DELETE</button>
     </mat-card-actions>
   </mat-card>
   </div>

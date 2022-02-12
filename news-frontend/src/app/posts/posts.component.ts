@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class PostsComponent implements OnInit, OnDestroy {
   posts!: News[];
-  newsSubscription!: Subscription
+  newsSubscription!: Subscription;
   apiUrl = environment.apiUrl;
 
   constructor(private newsService: NewsService) { }
@@ -26,5 +26,11 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.newsSubscription.unsubscribe();
+  }
+
+  deletePost(id: number) {
+    this.newsService.deletePost(id).subscribe(()=> {
+      this.newsService.getNews();
+    })
   }
 }

@@ -21,8 +21,41 @@
       {{ comment.comment }}
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button>DELETE</button>
+      <button (click)="deleteComment(comment.id)" mat-button>DELETE</button>
     </mat-card-actions>
+  </mat-card>
+</div>
+
+<div style="width: 70%; padding: 40px">
+  <h3>Add new Comment</h3>
+  <mat-card>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Author</mat-label>
+          <input name="author" matInput ngModel/>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <textarea
+            name="content"
+            ngModel
+            required
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+          ></textarea>
+        </mat-form-field>
+        <div>
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="f.invalid"
+          >ADD</button>
+        </div>
+      </form>
+    </mat-card-content>
   </mat-card>
 </div>
 

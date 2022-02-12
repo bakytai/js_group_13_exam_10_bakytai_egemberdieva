@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 })
 
 export  class NewsService {
-  newsFetching = new Subject<boolean>();
   newsChange = new Subject<News[]>();
 
   private news: News[] = [];
@@ -18,7 +17,6 @@ export  class NewsService {
   constructor(private http: HttpClient) {}
 
   getNews() {
-    this.newsFetching.next(true);
     return this.http.get<News[]>(environment.apiUrl + '/news')
       .pipe(map(result => {
         if (result === null) {
@@ -31,7 +29,6 @@ export  class NewsService {
       .subscribe(data => {
         this.news = data;
         this.newsChange.next(this.news.slice());
-        this.newsFetching.next(false);
       });
   };
 
@@ -54,5 +51,9 @@ export  class NewsService {
         return new News(result.id, result.title, result.content, result.image, result.date);
       })
     );
+  };
+
+  deletePost(id: number) {
+    return this.http.delete(environment.apiUrl + `/news/${id}`);
   }
 }

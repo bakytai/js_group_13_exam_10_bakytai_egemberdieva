@@ -7,10 +7,8 @@ export class Comments {
   ) {}
 }
 
-export interface NewsData {
+export interface CommentsData {
   [key: string]: any;
-  title: string;
-  content: string;
-  image: File | null;
-  date: string;
+  author: string;
+  comment: string;
 }

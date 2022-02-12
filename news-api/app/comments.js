@@ -21,19 +21,11 @@ router.get('/', async ( req, res,next) => {
 
 router.post('/', async (req, res,next) => {
     try {
-        if (!req.body.news_id || !req.body.content) {
-            return res.status(400).send({message: 'Wrong news'});
-        }
-
         const comment = {
             news_id: req.body.news_id,
-            author: 'Anonymous',
+            author: req.body.author,
             comment: req.body.comment,
         };
-
-        if (req.body.author) {
-            comment.author = req.body.author;
-        }
 
         let query = 'INSERT INTO comments (news_id,author,comment) VALUES (?,?,?)';
 
