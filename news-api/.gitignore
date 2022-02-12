@@ -1,2 +1,5 @@
 node_modules
 .idea
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/4xvq3MauPK6wJGwtwVp0L.jpg
