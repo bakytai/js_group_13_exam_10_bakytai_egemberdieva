@@ -12,3 +12,18 @@
 </div>
 
 <h2>Comments:</h2>
+
+<br>
+<div *ngFor="let comment of comments">
+  <mat-card>
+    <mat-card-title>{{ comment.author }}</mat-card-title>
+    <mat-card-content>
+      {{ comment.comment }}
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button>DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

@@ -8,7 +8,7 @@ router.get('/', async ( req, res,next) => {
         let query = 'SELECT * FROM comments';
 
         if (req.query.news_id) {
-            query += 'WHERE news_id' + req.query.news_id
+            query += ` WHERE news_id = ${req.query.news_id}`;
         }
 
         let [comments] = await db.getConnection().execute(query);
